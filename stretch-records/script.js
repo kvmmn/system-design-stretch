@@ -32,9 +32,21 @@ function renderCards(list) {
   }
 }
 
+// fetch("artists.json")
+//   .then((response) => response.json())
+//   .then((artists) => renderCards(artists));
+
+const statusMessage = document.querySelector(".status");
+statusMessage.textContent = "Loading artists...";
+
 fetch("artists.json")
   .then((response) => response.json())
-  .then((artists) => renderCards(artists));
+  .then((artists) => {
+    setTimeout(() => {
+      renderCards(artists);
+      statusMessage.textContent = "";
+    }, 2000);
+  });
 
 // Shuffle: pick a random artist and feature them.
 const shuffleButton = document.querySelector(".shuffle");
